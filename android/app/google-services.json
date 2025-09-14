@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "692652812832",
+    "project_id": "women-shealthapp",
+    "storage_bucket": "women-shealthapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692652812832:android:248394209a4bbb0363aa45",
+        "android_client_info": {
+          "package_name": "com.mobileapp2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8rdhDTiPREjC_5B13u8_hF-aDPaM_LrM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692652812832:android:483678ac833799b263aa45",
+        "android_client_info": {
+          "package_name": "com.mobileapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8rdhDTiPREjC_5B13u8_hF-aDPaM_LrM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
