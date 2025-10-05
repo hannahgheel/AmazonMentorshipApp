@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 
 import FeedScreen from '../screens/FeedScreen';
 import GroupsScreen from '../screens/GroupsScreen';
@@ -15,7 +16,14 @@ import RegisterScreen from '../screens/RegisterScreen';
 import CreatePostScreen from '../screens/CreatePostScreen';
 import CreateProfileScreen from '../screens/CreateProfileScreen';
 import SearchUsersScreen from '../screens/SearchUsersScreen';
+import FriendsScreen from '../screens/FriendsScreen';
+import AiChatScreen from '../screens/AiChatScreen';
+import GroupChatScreen from '../screens/GroupChatScreen';
+import CommentScreen from '../screens/CommentScreen'; // Adjust the path as needed
 import { colors } from '../styles/theme';
+
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Header from '../components/Header';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -32,42 +40,99 @@ const AppTheme = {
   },
 };
 
+function AuthStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Welcome"
+      screenOptions={{
+        headerTintColor: colors.forestGreen, // applies to all headers
+      }}
+    >
+      <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen name="CreateProfile" component={CreateProfileScreen} />
+    </Stack.Navigator>
+  );
+}
+
 function MainTabs() {
   return (
     <Tab.Navigator
       initialRouteName="Feed"
-      screenOptions={{
+      screenOptions={({ route }) => ({
         headerShown: false,
         tabBarActiveTintColor: colors.accent,
         tabBarInactiveTintColor: colors.textSecondary,
         tabBarStyle: { backgroundColor: colors.card, borderTopColor: colors.border },
-        tabBarLabelStyle: { fontFamily: 'serif', fontSize: 14 },
-      }}
+        tabBarShowLabel: false,
+        tabBarIcon: ({ color, size }) => {
+          let iconName;
+
+          if (route.name === 'Feed') {
+            iconName = 'home';
+          } else if (route.name === 'Groups') {
+            iconName = 'account-group';
+          } else if (route.name === 'Chat') {
+            iconName = 'chat';
+          } else if (route.name === 'LearningHub') {
+            iconName = 'school';
+          } else if (route.name === 'Profile') {
+            iconName = 'account';
+          }
+
+          return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
+        },
+      })}
     >
       <Tab.Screen name="Feed" component={FeedScreen} />
       <Tab.Screen name="Groups" component={GroupsScreen} />
       <Tab.Screen name="Chat" component={ChatScreen} />
       <Tab.Screen name="LearningHub" component={LearningHubScreen} options={{ title: 'Learning Hub' }} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
-      <Tab.Screen name="CreatePost" component={CreatePostScreen} />
     </Tab.Navigator>
   );
 }
 
+
+
+function MainStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen 
+        name="MainTabs" 
+        component={MainTabs} 
+        options={{ 
+          header: () => <Header />,
+        }} 
+      />
+    </Stack.Navigator>
+  );
+}
+
 export default function AppNavigator() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth().onAuthStateChanged(setUser);
+    return unsubscribe; // Unsubscribe on unmount
+  }, []);
+
   return (
     <NavigationContainer theme={AppTheme}>
-      <Stack.Navigator initialRouteName="Welcome">
-        <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Main" component={MainTabs} options={{ headerShown: false }} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Navigator>
+        {user ? (
+          <Stack.Screen name="Main" component={MainStack} options={{ headerShown: false }} />
+        ) : (
+          <Stack.Screen name="Auth" component={AuthStack} options={{ headerShown: false }} />
+        )}
         <Stack.Screen name="CreatePost" component={CreatePostScreen} />
-        <Stack.Screen name="Chat" component={ChatScreen} />
-        <Stack.Screen name="CreateProfile" component={CreateProfileScreen} />
         <Stack.Screen name="SearchUsers" component={SearchUsersScreen} />
+        <Stack.Screen name="Friends" component={FriendsScreen} />
         <Stack.Screen name="ChatMessage" component={ChatMessageScreen} />
+        <Stack.Screen name="AiChatScreen" component={AiChatScreen} />
+        <Stack.Screen name="GroupChatScreen" component={GroupChatScreen} />
+        <Stack.Screen name="CommentScreen" component={CommentScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -26,4 +26,18 @@ export default StyleSheet.create({
     fontFamily: fonts.heading,
     fontWeight: 'bold',
   },
+  requestSentButton: {
+    backgroundColor: '#3498db',
+    paddingVertical: 8,
+    paddingHorizontal: 18,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  requestSentButtonText: {
+    color: 'white',
+    fontSize: 15,
+    fontFamily: fonts.heading,
+    fontWeight: 'bold',
+  },
 });

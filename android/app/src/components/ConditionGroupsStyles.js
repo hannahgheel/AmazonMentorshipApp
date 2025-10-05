@@ -6,7 +6,7 @@ export default StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    color: colors.textPrimary,
+    color: colors.titles,
     marginBottom: 14,
     fontFamily: fonts.heading,
     textAlign: "center",
@@ -30,7 +30,7 @@ export default StyleSheet.create({
   },
   specialist: {
     fontSize: 15,
-    color: colors.textSecondary,
+    color: colors.titles,
     fontFamily: fonts.body,
     marginBottom: 8,
   },

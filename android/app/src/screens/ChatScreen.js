@@ -8,7 +8,8 @@ import styles from '../components/ChatScreenStyles';
 const ChatScreen = () => {
   const [friends, setFriends] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { uid } = auth().currentUser;
+  const currentUser = auth().currentUser;
+  const uid = currentUser ? currentUser.uid : null;
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -18,10 +19,12 @@ const ChatScreen = () => {
     }
 
     const unsubscribe = firestore().collection('users').doc(uid).onSnapshot(doc => {
+      if (!doc || !doc.exists) {
+        setLoading(false);
+        return;
+      }
       const data = doc.data();
-      console.log('User data:', data);
       const friendsUids = data?.friends || [];
-      console.log('Friend UIDs:', friendsUids);
       if (friendsUids.length > 0) {
         const fetchFriends = async () => {
           try {
@@ -30,7 +33,6 @@ const ChatScreen = () => {
                 if (!fid) return null;
                 const userDoc = await firestore().collection('users').doc(fid).get();
                 const fdata = userDoc.data();
-                console.log('Friend data for UID', fid, fdata);
                 if (userDoc.exists) {
                   return { ...fdata, uid: fid };
                 }
@@ -64,12 +66,23 @@ const ChatScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.header}>Chats</Text>
+      <TouchableOpacity
+        style={styles.chatListCard}
+        onPress={() => navigation.navigate('AiChatScreen')}
+      >
+        <Image source={{ uri: 'https://i.imgur.com/6b6Xq8E.png' }} style={styles.avatar} />
+        <View>
+          <Text style={styles.name}>Chat with AI</Text>
+          <Text style={styles.subtitle}>Get instant help and advice</Text>
+        </View>
+      </TouchableOpacity>
       <FlatList
         data={friends}
         keyExtractor={item => item.uid}
         renderItem={({ item }) => (
           <TouchableOpacity
-            style={styles.chatItem}
+            style={styles.chatListCard}
             onPress={() => navigation.navigate('ChatMessage', {
               friendUid: item.uid,
               friendName: item.name,
@@ -77,7 +90,10 @@ const ChatScreen = () => {
             })}
           >
             <Image source={{ uri: item.avatar }} style={styles.avatar} />
-            <Text style={styles.name}>{item.name}</Text>
+            <View>
+              <Text style={styles.name}>{item.name}</Text>
+              <Text style={styles.subtitle}>Tap to chat</Text>
+            </View>
           </TouchableOpacity>
         )}
         ListEmptyComponent={<Text style={styles.emptyText}>No friends yet. Add users to start chatting!</Text>}

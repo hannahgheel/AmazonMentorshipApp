@@ -2,11 +2,10 @@ import { StyleSheet } from 'react-native';
 import { colors, fonts } from '../styles/theme';
 
 export default StyleSheet.create({
-  card: { backgroundColor: colors.card, padding: 20, borderRadius: 18, margin: 16, elevation: 2, shadowColor: colors.border, shadowOpacity: 0.1, shadowRadius: 6 },
-  avatar: { width: 80, height: 80, borderRadius: 40, marginBottom: 10 },
-  name: { fontSize: 22, fontWeight: 'bold', color: colors.accent, fontFamily: fonts.heading },
-  bio: { fontSize: 16, color: colors.textPrimary, marginVertical: 6, fontFamily: fonts.body },
-  conditions: { fontSize: 14, color: colors.textSecondary, marginBottom: 8, fontFamily: fonts.body },
-  postsTitle: { fontWeight: 'bold', marginTop: 10, color: colors.textPrimary, fontFamily: fonts.heading },
-  post: { fontSize: 14, color: colors.textSecondary, marginLeft: 10, fontFamily: fonts.body },
+  container: { flex: 1, backgroundColor: colors.background, padding: 20 },
+  avatar: { width: 90, height: 90, borderRadius: 45, marginRight: 18, borderWidth: 2, borderColor: colors.backgroundGradientStart },
+  name: { fontSize: 24, fontWeight: 'bold', color: colors.accent, fontFamily: fonts.heading, marginBottom: 4 },
+  bio: { fontSize: 16, color: colors.textPrimary, fontFamily: fonts.body, marginBottom: 10 },
+  section: { marginBottom: 22 },
+  sectionTitle: { fontSize: 18, fontWeight: 'bold', color: colors.accent, fontFamily: fonts.heading, marginBottom: 8 },
 });

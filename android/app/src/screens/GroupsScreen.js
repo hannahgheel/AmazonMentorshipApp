@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import styles from '../components/GroupsScreenStyles';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+
+import { useNavigation } from '@react-navigation/native';
 
 const RECOMMENDED_GROUPS = [
   { id: '1', name: 'PCOS Support' },
@@ -10,11 +14,34 @@ const RECOMMENDED_GROUPS = [
 
 export default function GroupsScreen() {
   const [myGroups, setMyGroups] = useState([]);
+  useEffect(() => {
+    const uid = auth().currentUser?.uid;
+    if (!uid) return;
 
-  const handleJoin = (group) => {
-    if (!myGroups.find(g => g.id === group.id)) {
-      setMyGroups([...myGroups, group]);
-    }
+    const unsubscribe = firestore()
+      .collection('users')
+      .doc(uid)
+      .onSnapshot(doc => {
+        if (doc && doc.exists) {
+          const userData = doc.data();
+          if (userData.groups) {
+            setMyGroups(userData.groups);
+          }
+        }
+      });
+
+    return unsubscribe;
+  }, []);
+  const navigation = useNavigation();
+
+  const handleJoin = async (group) => {
+    const uid = auth().currentUser?.uid;
+    if (!uid) return;
+
+    const userRef = firestore().collection('users').doc(uid);
+    await userRef.update({
+      groups: firestore.FieldValue.arrayUnion(group),
+    });
   };
 
   return (
@@ -46,9 +73,11 @@ export default function GroupsScreen() {
           data={myGroups}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
-            <View style={styles.groupItem}>
-              <Text style={styles.groupName}>{item.name}</Text>
-            </View>
+            <TouchableOpacity onPress={() => navigation.navigate('GroupChatScreen', { groupId: item.id, groupName: item.name })}>
+              <View style={styles.groupItem}>
+                <Text style={styles.groupName}>{item.name}</Text>
+              </View>
+            </TouchableOpacity>
           )}
         />
       )}

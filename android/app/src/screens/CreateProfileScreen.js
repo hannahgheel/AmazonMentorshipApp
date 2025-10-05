@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Image } from 'react-native';
+import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
@@ -44,7 +44,9 @@ export default function CreateProfileScreen({ navigation, route }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Create Your Profile</Text>
-      <Button title="Pick Profile Picture" onPress={pickImage} />
+      <TouchableOpacity style={styles.button} onPress={pickImage}>
+        <Text style={styles.buttonText}>Pick Profile Picture</Text>
+      </TouchableOpacity>
       {photoUri && <Image source={{ uri: photoUri }} style={styles.image} />}
       <TextInput
         style={styles.input}
@@ -52,11 +54,15 @@ export default function CreateProfileScreen({ navigation, route }) {
         value={bio}
         onChangeText={setBio}
       />
-      <Button
-        title={uploading ? "Uploading..." : "Continue to App"}
+      <TouchableOpacity
+        style={[styles.button, uploading || !bio ? { opacity: 0.6 } : null]}
         onPress={handleContinue}
         disabled={uploading || !bio}
-      />
+      >
+        <Text style={styles.buttonText}>
+          {uploading ? "Uploading..." : "Continue to App"}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }

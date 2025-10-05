@@ -20,11 +20,15 @@ export default function ChatMessageScreen({ route }) {
       .collection('messages')
       .orderBy('timestamp', 'asc')
       .onSnapshot(snapshot => {
+        console.log('Snapshot received:', snapshot);
         if (!snapshot || !snapshot.docs) {
+          console.log('Snapshot is null or has no docs, clearing messages.');
           setMessages([]);
           return;
         }
-        setMessages(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+        const newMessages = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        console.log('New messages:', newMessages);
+        setMessages(newMessages);
       });
     return unsubscribe;
   }, [uid, friendUid]);
@@ -55,11 +59,10 @@ export default function ChatMessageScreen({ route }) {
         data={messages}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <View style={[
-            styles.messageBubble,
-            item.sender === uid ? styles.myMessage : styles.theirMessage
-          ]}>
-            <Text style={styles.messageText}>{item.body}</Text>
+          <View style={[styles.messageContainer, item.sender === uid ? styles.myMessageContainer : styles.theirMessageContainer]}>
+            <View style={[styles.messageBubble, item.sender === uid ? styles.myMessage : styles.theirMessage]}>
+              <Text style={styles.messageText}>{item.body}</Text>
+            </View>
           </View>
         )}
         style={{ flex: 1 }}

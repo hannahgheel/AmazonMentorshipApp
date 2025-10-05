@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import Logo from '../components/Logo';
@@ -56,6 +56,7 @@ export default function RegisterScreen({ navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Name"
+        placeholderTextColor="white"
         value={name}
         onChangeText={setName}
         autoCapitalize="words"
@@ -63,6 +64,7 @@ export default function RegisterScreen({ navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Email"
+        placeholderTextColor="white"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
@@ -71,6 +73,7 @@ export default function RegisterScreen({ navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Password"
+        placeholderTextColor="white"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
@@ -78,14 +81,13 @@ export default function RegisterScreen({ navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Bio"
+        placeholderTextColor="white"
         value={bio}
         onChangeText={setBio}
       />
-      <Button
-        title={loading ? "Registering..." : "Register"}
-        onPress={handleRegister}
-        disabled={loading}
-      />
+      <TouchableOpacity style={styles.button} onPress={handleRegister} disabled={loading}>
+        <Text style={styles.buttonText}>{loading ? "Registering..." : "Register"}</Text>
+      </TouchableOpacity>
     </View>
   );
 }

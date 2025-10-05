@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "MobileApp2.app"
-               BlueprintName = "MobileApp2"
-               ReferencedContainer = "container:MobileApp2.xcodeproj">
+               BuildableName = "AmazonMentorshipApp.app"
+               BlueprintName = "AmazonMentorshipApp"
+               ReferencedContainer = "container:AmazonMentorshipApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "MobileApp2Tests.xctest"
-               BlueprintName = "MobileApp2Tests"
-               ReferencedContainer = "container:MobileApp2.xcodeproj">
+               BuildableName = "AmazonMentorshipAppTests.xctest"
+               BlueprintName = "AmazonMentorshipAppTests"
+               ReferencedContainer = "container:AmazonMentorshipApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "MobileApp2.app"
-            BlueprintName = "MobileApp2"
-            ReferencedContainer = "container:MobileApp2.xcodeproj">
+            BuildableName = "AmazonMentorshipApp.app"
+            BlueprintName = "AmazonMentorshipApp"
+            ReferencedContainer = "container:AmazonMentorshipApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "MobileApp2.app"
-            BlueprintName = "MobileApp2"
-            ReferencedContainer = "container:MobileApp2.xcodeproj">
+            BuildableName = "AmazonMentorshipApp.app"
+            BlueprintName = "AmazonMentorshipApp"
+            ReferencedContainer = "container:AmazonMentorshipApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

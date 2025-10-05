@@ -1,4 +1,4 @@
-package com.mobileapp2
+package com.AmazonMentorshipApp
 
 import android.app.Application
 import com.facebook.react.PackageList

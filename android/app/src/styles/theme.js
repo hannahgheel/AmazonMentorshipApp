@@ -1,15 +1,22 @@
 export const colors = {
-  background: '#F7F3E8',      // Cream
-  card: '#EDE6D6',            // Light beige
-  accent: '#D8B16A',          // Muted orange
-  textPrimary: '#3E3A29',     // Dark olive
-  textSecondary: '#A08C6A',   // Muted brown
-  highlight: '#F5C16C',       // Soft yellow/orange
-  border: '#D6CFC2',          // Light border
-  button: '#A08C6A',          // Muted brown
-  buttonText: '#FFF8E1',      // Off-white
+  background: '#F9F6F2',
+  card: '#FFF',
+  accent: '#E49B3A',
+  purple: '#6C5B7B',
+  tag: '#F3E6FF',
+  textPrimary: '#222',
+  textSecondary: '#B0AEB8',
+  border: '#E0E0E0',
+  backgroundGradientStart: '#F9F6F2',
+  backgroundGradientEnd: '#F9F6F2',
+  button: '#E49B3A',
+  buttonText: '#FFF',
+  link: '#6C5B7B',
+  titles: '#6C5B7B',
+  logoOrange: '#E49B3A',
 };
+
 export const fonts = {
-  heading: 'serif',           // Use a custom font if available
+  heading: 'borel', // Or your custom font
   body: 'sans-serif',
 };

@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:692652812832:android:248394209a4bbb0363aa45",
         "android_client_info": {
-          "package_name": "com.mobileapp2"
+          "package_name": "com.AmazonMentorshipApp"
         }
       },
       "oauth_client": [],
@@ -28,7 +28,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:692652812832:android:483678ac833799b263aa45",
         "android_client_info": {
-          "package_name": "com.mobileapp"
+          "package_name": "com.AmazonMentorshipApp"
         }
       },
       "oauth_client": [],

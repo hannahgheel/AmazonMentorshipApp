@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window = UIWindow(frame: UIScreen.main.bounds)
 
     factory.startReactNative(
-      withModuleName: "MobileApp2",
+      withModuleName: "AmazonMentorshipApp",
       in: window,
       launchOptions: launchOptions
     )

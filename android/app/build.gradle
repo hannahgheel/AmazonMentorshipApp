@@ -84,9 +84,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.mobileapp2"
+    namespace "com.AmazonMentorshipApp"
     defaultConfig {
-        applicationId "com.mobileapp2"
+        applicationId "com.AmazonMentorshipApp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -136,3 +136,5 @@ dependencies {
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
 }
+
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, fonts } from '../styles/theme';
+import { colors } from '../styles/theme';
 
 export default StyleSheet.create({
   container: {
@@ -9,42 +9,32 @@ export default StyleSheet.create({
     backgroundColor: colors.background,
   },
   title: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
-    color: colors.textPrimary,
-    marginBottom: 24,
-    fontFamily: fonts.heading,
-    letterSpacing: 1,
+    color: colors.titles,
+    marginBottom: 20,
   },
   input: {
     width: '80%',
-    padding: 14,
-    marginVertical: 10,
+    padding: 10,
+    marginVertical: 8,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 18,
+    borderRadius: 8,
     backgroundColor: colors.card,
     color: colors.textPrimary,
-    fontSize: 16,
-    fontFamily: fonts.body,
-    shadowColor: colors.border,
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
   },
   button: {
-    marginTop: 18,
+    width: '80%',
+    padding: 15,
+    marginVertical: 10,
     backgroundColor: colors.button,
-    borderRadius: 18,
-    paddingVertical: 12,
-    paddingHorizontal: 40,
-    elevation: 2,
+    borderRadius: 8,
+    alignItems: 'center',
   },
   buttonText: {
     color: colors.buttonText,
-    fontSize: 18,
     fontWeight: 'bold',
-    fontFamily: fonts.heading,
-    letterSpacing: 1,
+    fontSize: 16,
   },
 });

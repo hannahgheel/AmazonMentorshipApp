@@ -7,6 +7,7 @@ import styles from '../components/SearchUsersScreenStyles';
 export default function SearchUsersScreen({ navigation }) {
   const [users, setUsers] = useState([]);
   const [myFriends, setMyFriends] = useState([]);
+  const [sentRequests, setSentRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const uid = auth().currentUser?.uid;
 
@@ -33,25 +34,42 @@ export default function SearchUsersScreen({ navigation }) {
         setMyFriends(data?.friends || []);
       });
 
+    const unsubscribeSentRequests = firestore()
+      .collection('users')
+      .doc(uid)
+      .collection('sentFriendRequests')
+      .onSnapshot(snapshot => {
+        if (snapshot) {
+          setSentRequests(snapshot.docs.map(doc => doc.id));
+        }
+      });
+
     return () => {
       unsubscribeUsers();
       unsubscribeFriends();
+      unsubscribeSentRequests();
     };
   }, [uid]);
 
-  const handleAddFriend = async (friendUid) => {
-    await firestore()
-      .collection('users')
-      .doc(uid)
-      .update({
-        friends: firestore.FieldValue.arrayUnion(friendUid)
-      });
-    await firestore()
-      .collection('users')
-      .doc(friendUid)
-      .update({
-        friends: firestore.FieldValue.arrayUnion(uid)
-      });
+  const handleSendFriendRequest = async (friendUid) => {
+    console.log('Sending friend request to:', friendUid);
+    try {
+      await firestore()
+        .collection('users')
+        .doc(uid)
+        .collection('sentFriendRequests')
+        .doc(friendUid)
+        .set({});
+      await firestore()
+        .collection('users')
+        .doc(friendUid)
+        .collection('receivedFriendRequests')
+        .doc(uid)
+        .set({});
+      console.log('Friend request sent successfully!');
+    } catch (error) {
+      console.error('Error sending friend request:', error);
+    }
   };
 
   if (!uid || loading) {
@@ -79,10 +97,14 @@ export default function SearchUsersScreen({ navigation }) {
               <View style={styles.friendsButton}>
                 <Text style={styles.friendsButtonText}>Friends</Text>
               </View>
+            ) : sentRequests.includes(item.uid) ? (
+              <View style={styles.requestSentButton}>
+                <Text style={styles.requestSentButtonText}>Requested</Text>
+              </View>
             ) : (
               <TouchableOpacity
                 style={styles.addButton}
-                onPress={() => handleAddFriend(item.uid)}
+                onPress={() => handleSendFriendRequest(item.uid)}
               >
                 <Text style={styles.addButtonText}>Add</Text>
               </TouchableOpacity>
