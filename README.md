@@ -1,4 +1,4 @@
-This is NOT a period tracker, because women's health is so much more than just our menstrual cycle
+This is NOT a period tracker, because women's health is so much more than just a menstrual cycle
 
 Vita – Women’s Health Platform
 
