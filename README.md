@@ -1,97 +1,51 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+This is NOT a period tracker, because women's health is so much more than just our menstrual cycle
 
-# Getting Started
+Vita – Women’s Health Platform
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+Vita is a women’s health platform designed to create a safe, supportive space where women can share their health challenges and connect with others who truly understand. Too often, medical research has centred on men, leaving women misdiagnosed, misunderstood, and underserved. Vita aims to close that gap by combining community support with reliable, women-specific health information, helping users learn, advocate for themselves, and feel empowered on their journey to better health.
 
-## Step 1: Start Metro
+🌸 Purpose
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+Women’s health data has historically been underrepresented in clinical studies:
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+Only 38% of clinical studies report data by sex.
 
-```sh
-# Using npm
-npm start
+Less than 23% discuss sex-specific results.
 
-# OR using Yarn
-yarn start
-```
+Women under 55 having a heart attack are 7× more likely to be misdiagnosed and sent home.
 
-## Step 2: Build and run your app
+70% of chronic pain sufferers are women, yet 80% of pain studies are conducted on men.
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+Vita seeks to change this by providing an inclusive, evidence-based environment for women to track, understand, and discuss their health in ways that truly reflect them.
 
-### Android
+🧠 Key Features
 
-```sh
-# Using npm
-npm run android
+Community Support: A safe social space for users to share experiences, advice, and encouragement.
 
-# OR using Yarn
-yarn android
-```
+Personalised Health Feed: Learn from trusted, research-backed health content designed for women.
 
-### iOS
+Research Insights: Access curated summaries from current studies closing the gender health gap.
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+Empowerment Tools: Discover self-advocacy resources and connect to credible, women-specific information.
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+🧬 Research Foundation
 
-```sh
-bundle install
-```
+Vita draws inspiration from leading studies and advocacy work in the gender health gap:
 
-Then, and every time you update your native dependencies, run:
+Medical Research Foundation – Closing the Sex and Gender Gap in Medical Research (Dr Alison Simmons)
+Highlights how most studies default to male models, resulting in skewed data and misdiagnosis. Vita bridges this gap by connecting users with real-world, tailored information before academia fully catches up.
 
-```sh
-bundle exec pod install
-```
+Fawcett Society – The Gender Health Gap, Our Stories (Zaimla Azad & Freya Barnes)
+Explores lived experiences of women facing diagnostic delays, workplace challenges, and dismissal in care. Vita provides structured, cultural change through open, transparent health dialogue.
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+💻 Tech Stack
 
-```sh
-# Using npm
-npm run ios
+Frontend: React Native
 
-# OR using Yarn
-yarn ios
-```
+Backend: Firebase (Authentication, Firestore, Storage)
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+Hosting/Deployment: Expo
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+Version Control: GitHub
 
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Real-time Features: Firestore onSnapshot listeners for live feeds and user profiles
