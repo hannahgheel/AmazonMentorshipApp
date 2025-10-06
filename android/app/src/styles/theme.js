@@ -17,6 +17,6 @@ export const colors = {
 };
 
 export const fonts = {
-  heading: 'sans-serif', // Or your custom font
+  heading: 'sans-serif',
   body: 'sans-serif',
 };

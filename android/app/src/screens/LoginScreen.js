@@ -61,7 +61,6 @@ export function RegisterScreen({ navigation }) {
 
   const handleRegister = () => {
     if (username && password) {
-      // Save user info to backend or local storage !!!
       Alert.alert('Account Created', 'You can now log in.');
       navigation.navigate('Login');
     } else {

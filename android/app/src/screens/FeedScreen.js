@@ -5,6 +5,7 @@ import firestore from '@react-native-firebase/firestore';
 import styles from '../components/FeedScreenStyles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+// Main feed screen showing all posts
 export default function FeedScreen({ navigation }) {
   const [posts, setPosts] = useState([]);
 
@@ -33,6 +34,7 @@ export default function FeedScreen({ navigation }) {
     }
   };
 
+  // Fetch posts from Firestore when component mounts
   useEffect(() => {
     const unsubscribe = firestore()
       .collection('posts')
@@ -55,6 +57,7 @@ export default function FeedScreen({ navigation }) {
     return unsubscribe;
   }, []);
 
+  // Renders each post in the feed
   const renderItem = ({ item }) => {
     const uid = auth().currentUser?.uid;
     const userLiked = item.likes?.includes(uid);

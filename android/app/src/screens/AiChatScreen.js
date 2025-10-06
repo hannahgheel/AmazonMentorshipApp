@@ -16,8 +16,6 @@ const AiChatScreen = () => {
     setLoading(true);
 
     try {
-      // Ensure you are running the backend server.
-      // For iOS simulator, it's localhost. For Android emulator, you might need to use 10.0.2.2
       const response = await fetch('https://us-central1-women-shealthapp.cloudfunctions.net/chatWithOpenAI', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

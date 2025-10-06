@@ -7,6 +7,7 @@ import firestore from '@react-native-firebase/firestore';
 import { colors } from '../styles/theme';
 import styles from '../components/ProfileScreenStyles';
 
+// Profile screen showing user info and their posts
 export default function ProfileScreen({ navigation }) {
   const [profile, setProfile] = useState(null);
   const [friends, setFriends] = useState([]);
@@ -15,6 +16,7 @@ export default function ProfileScreen({ navigation }) {
   const isFocused = useIsFocused();
   const uid = auth().currentUser?.uid;
 
+  // Fetch user profile and posts when screen mounts
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(user => {
       if (user) {
@@ -110,7 +112,7 @@ export default function ProfileScreen({ navigation }) {
   };
 
   if (!profile) {
-    return null; // or a loading indicator
+    return null;
   }
 
   return (

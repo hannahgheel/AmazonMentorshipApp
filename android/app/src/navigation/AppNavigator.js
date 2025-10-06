@@ -20,7 +20,7 @@ import SearchUsersScreen from '../screens/SearchUsersScreen';
 import FriendsScreen from '../screens/FriendsScreen';
 import AiChatScreen from '../screens/AiChatScreen';
 import GroupChatScreen from '../screens/GroupChatScreen';
-import CommentScreen from '../screens/CommentScreen'; // Adjust the path as needed
+import CommentScreen from '../screens/CommentScreen';
 import { colors } from '../styles/theme';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -140,7 +140,7 @@ export default function AppNavigator() {
     };
   }, []);
 
-  if (checking) return null; // or a loading spinner
+  if (checking) return null;
 
   return (
     <NavigationContainer theme={AppTheme}>

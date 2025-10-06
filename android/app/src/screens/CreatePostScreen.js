@@ -6,10 +6,13 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import styles from '../components/CreatePostScreenStyles';
 
+// Screen for creating a new post
 export default function CreatePostScreen({ navigation }) {
+  // State for post content and image
   const [content, setContent] = useState('');
   const [imageUri, setImageUri] = useState(null);
 
+  // Function to pick an image from the device
   const pickImage = () => {
     launchImageLibrary({ mediaType: 'photo' }, (response) => {
       if (response.didCancel) {
@@ -22,6 +25,7 @@ export default function CreatePostScreen({ navigation }) {
     });
   };
 
+  // Function to handle posting
   const handlePost = async () => {
     const uid = auth().currentUser?.uid;
     if (!uid) {
