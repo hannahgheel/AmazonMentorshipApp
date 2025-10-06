@@ -20,19 +20,15 @@ export default function RegisterScreen({ navigation }) {
     setLoading(true);
     try {
       const userCredential = await auth().createUserWithEmailAndPassword(email, password);
-      console.log('User created:', userCredential.user.uid); // Debug log
-      await firestore().collection('users').doc(userCredential.user.uid).set({
+      const uid = userCredential.user.uid;
+      await firestore().collection('users').doc(uid).set({
         email,
         name,
         bio,
+        profileComplete: false,
+        avatar: `https://source.unsplash.com/random/150x150/?portrait,woman&${uid}`,
       });
-      console.log('Firestore write successful'); // Debug log
-      Alert.alert('Successfully registered', 'Now create your profile!', [
-        {
-          text: 'OK',
-          onPress: () => navigation.navigate('CreateProfile', { uid: userCredential.user.uid }),
-        },
-      ]);
+      Alert.alert('Successfully registered', 'Now create your profile!');
     } catch (error) {
       console.log('Registration error:', error); // Debug log
       if (error.code === 'auth/email-already-in-use') {
@@ -56,7 +52,7 @@ export default function RegisterScreen({ navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Name"
-        placeholderTextColor="white"
+        placeholderTextColor="#274172"
         value={name}
         onChangeText={setName}
         autoCapitalize="words"
@@ -64,7 +60,7 @@ export default function RegisterScreen({ navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Email"
-        placeholderTextColor="white"
+        placeholderTextColor="#274172"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
@@ -73,17 +69,10 @@ export default function RegisterScreen({ navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Password"
-        placeholderTextColor="white"
+        placeholderTextColor="#274172"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Bio"
-        placeholderTextColor="white"
-        value={bio}
-        onChangeText={setBio}
       />
       <TouchableOpacity style={styles.button} onPress={handleRegister} disabled={loading}>
         <Text style={styles.buttonText}>{loading ? "Registering..." : "Register"}</Text>

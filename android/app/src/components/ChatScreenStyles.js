@@ -22,7 +22,7 @@ export default StyleSheet.create({
     borderRadius: 27,
     marginRight: 16,
     borderWidth: 2,
-    borderColor: colors.backgroundGradientStart,
+    borderColor: colors.background,
     backgroundColor: colors.background,
   },
   name: {

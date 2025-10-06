@@ -15,13 +15,8 @@ export default function LoginScreen({ navigation }) {
       auth()
         .signInWithEmailAndPassword(email, password)
         .then(userCredential => {
-          // Signed in 
-          var user = userCredential.user;
-          // Navigate to the main part of the app
-          navigation.navigate('Main', {
-            screen: 'MainTabs',
-            params: { screen: 'Feed' }
-          });
+          const user = userCredential.user;
+          Alert.alert('Login Successful', `Welcome, ${user.email}!`);
         })
         .catch(error => {
           Alert.alert('Login Failed', error.message);

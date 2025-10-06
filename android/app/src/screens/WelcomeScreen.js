@@ -7,11 +7,8 @@ import { colors } from '../styles/theme';
 
 export default function WelcomeScreen({ navigation }) {
   return (
-    <LinearGradient
-      colors={[colors.backgroundGradientStart, colors.backgroundGradientEnd]}
-      style={styles.container}
-    >
-      <Logo size={350} style={{ marginBottom: 0 }} />
+    <View style={styles.container}>
+      <Logo size={200} style={{ marginBottom: 0 }} />
       <Text style={styles.vitaText}>Vita</Text>
       <Text style={styles.title}>Welcome to Vita!</Text>
       <Text style={styles.subtitle}>
@@ -33,6 +30,6 @@ export default function WelcomeScreen({ navigation }) {
           Already have an account? Click here to log in
         </Text>
       </TouchableOpacity>
-    </LinearGradient>
+    </View>
   );
 }

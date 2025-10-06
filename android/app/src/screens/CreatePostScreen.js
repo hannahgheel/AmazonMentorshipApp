@@ -34,7 +34,8 @@ export default function CreatePostScreen({ navigation }) {
     }
 
     try {
-      let imageUrl = null;
+      // Use an AI-generated woman image if no image is picked
+      let imageUrl = `https://picsum.photos/600/400?random=${Math.random()}`;
       if (imageUri) {
         const filename = imageUri.substring(imageUri.lastIndexOf('/') + 1);
         const storageRef = storage().ref(`post_images/${uid}/${filename}`);

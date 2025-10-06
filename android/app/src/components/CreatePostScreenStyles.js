@@ -19,7 +19,7 @@ export default StyleSheet.create({
     marginBottom: 24, 
     color: colors.textPrimary, 
     fontFamily: fonts.body, 
-    fontSize: 16, 
+    fontSize: 24,
     textAlignVertical: 'top'
   },
 });

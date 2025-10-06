@@ -5,6 +5,8 @@ import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../components/ChatScreenStyles';
 
+import Logo from '../assets/logo.svg';
+
 const ChatScreen = () => {
   const [friends, setFriends] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -71,7 +73,7 @@ const ChatScreen = () => {
         style={styles.chatListCard}
         onPress={() => navigation.navigate('AiChatScreen')}
       >
-        <Image source={{ uri: 'https://i.imgur.com/6b6Xq8E.png' }} style={styles.avatar} />
+        <Logo width={50} height={50} style={styles.avatar} />
         <View>
           <Text style={styles.name}>Chat with AI</Text>
           <Text style={styles.subtitle}>Get instant help and advice</Text>

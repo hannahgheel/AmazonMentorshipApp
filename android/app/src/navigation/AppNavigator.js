@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 import FeedScreen from '../screens/FeedScreen';
 import GroupsScreen from '../screens/GroupsScreen';
@@ -43,7 +44,6 @@ const AppTheme = {
 function AuthStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Welcome"
       screenOptions={{
         headerTintColor: colors.forestGreen, // applies to all headers
       }}
@@ -98,7 +98,7 @@ function MainTabs() {
 
 function MainStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="MainTabs">
       <Stack.Screen 
         name="MainTabs" 
         component={MainTabs} 
@@ -112,19 +112,45 @@ function MainStack() {
 
 export default function AppNavigator() {
   const [user, setUser] = useState(null);
+  const [profileComplete, setProfileComplete] = useState(null);
+  const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = auth().onAuthStateChanged(setUser);
-    return unsubscribe; // Unsubscribe on unmount
+    let unsubscribeProfile = () => {}; // Initialize with a no-op function
+
+    const unsubscribeAuth = auth().onAuthStateChanged(async (firebaseUser) => {
+      setUser(firebaseUser);
+      if (firebaseUser) {
+        const userDocRef = firestore().collection('users').doc(firebaseUser.uid);
+        unsubscribeProfile = userDocRef.onSnapshot(doc => {
+          setProfileComplete(doc.data()?.profileComplete);
+          setChecking(false);
+        });
+      } else {
+        // Clean up profile listener if user logs out
+        unsubscribeProfile(); 
+        setProfileComplete(null);
+        setChecking(false);
+      }
+    });
+
+    return () => {
+      unsubscribeAuth();
+      unsubscribeProfile(); // Ensure cleanup on component unmount
+    };
   }, []);
+
+  if (checking) return null; // or a loading spinner
 
   return (
     <NavigationContainer theme={AppTheme}>
       <Stack.Navigator>
-        {user ? (
-          <Stack.Screen name="Main" component={MainStack} options={{ headerShown: false }} />
-        ) : (
+        {!user ? (
           <Stack.Screen name="Auth" component={AuthStack} options={{ headerShown: false }} />
+        ) : !profileComplete ? (
+          <Stack.Screen name="CreateProfile" component={CreateProfileScreen} options={{ headerShown: false }} />
+        ) : (
+          <Stack.Screen name="Main" component={MainStack} options={{ headerShown: false }} />
         )}
         <Stack.Screen name="CreatePost" component={CreatePostScreen} />
         <Stack.Screen name="SearchUsers" component={SearchUsersScreen} />

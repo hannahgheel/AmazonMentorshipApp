@@ -43,9 +43,17 @@ export default function ProfileScreen({ navigation }) {
           .collection('posts')
           .where('author', '==', uid)
           .orderBy('timestamp', 'desc')
-          .onSnapshot(snapshot => {
+          .onSnapshot(async snapshot => {
             if (snapshot) {
-              setPosts(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+              const postsData = await Promise.all(
+                snapshot.docs.map(async doc => {
+                  const post = { id: doc.id, ...doc.data() };
+                  const userDoc = await firestore().collection('users').doc(post.author).get();
+                  const userData = userDoc.data();
+                  return { ...post, authorName: userData?.name, authorAvatar: userData?.avatar };
+                })
+              );
+              setPosts(postsData);
             }
           });
 
@@ -141,8 +149,8 @@ export default function ProfileScreen({ navigation }) {
           return (
             <View style={styles.postCard}>
               <View style={styles.postHeader}>
-                <Image source={{ uri: profile.avatar }} style={styles.postAvatar} />
-                <Text style={styles.authorName}>{profile.name}</Text>
+                <Image source={{ uri: item.authorAvatar }} style={styles.postAvatar} />
+                <Text style={styles.authorName}>{item.authorName}</Text>
               </View>
               {item.imageUrl ? (
                 <Image source={{ uri: item.imageUrl }} style={styles.postImage} />

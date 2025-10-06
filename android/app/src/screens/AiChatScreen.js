@@ -39,7 +39,7 @@ const AiChatScreen = () => {
   return (
     <KeyboardAvoidingView
       style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === "android" ? "padding" : "height"}
       keyboardVerticalOffset={100}
     >
       <FlatList
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     },
     aiMessage: {
       alignSelf: 'flex-start',
-      backgroundColor: colors.card,
+      backgroundColor: '#274172',
       padding: 12,
       borderRadius: 20,
       marginVertical: 5,
@@ -118,11 +118,11 @@ const styles = StyleSheet.create({
     },
     userMessageText: {
       fontSize: 16,
-      color: '#fff',
+      color: colors.card,
     },
     aiMessageText: {
       fontSize: 16,
-      color: colors.textPrimary,
+      color: colors.card,
     },
     loading: {
       marginVertical: 10,

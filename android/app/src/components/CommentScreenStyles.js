@@ -11,9 +11,9 @@ export default StyleSheet.create({
     alignItems: 'flex-start',
   },
   commentAvatar: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
     marginRight: 10,
   },
   commentContent: {
@@ -23,13 +23,13 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     color: colors.textPrimary,
     fontFamily: fonts.heading,
-    fontSize: 14,
+    fontSize: 20,
     marginBottom: 2,
   },
   commentText: {
     color: colors.textPrimary,
     fontFamily: fonts.body,
-    fontSize: 14,
+    fontSize: 18,
   },
   inputContainer: {
     flexDirection: 'row',
